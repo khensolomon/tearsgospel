@@ -35,7 +35,7 @@
 				</div>
 			<?php endif; ?>
 				<div class="form-group">
-				  <textarea class="form-control" rows="5" id="comment" tabindex="4"></textarea>
+				  <textarea class="form-control" rows="5" name="comment" id="comment" tabindex="4"></textarea>
 				</div>
 				<div class="input-group">
 				  <input type="submit" class="btn btn-primary contact-submit" name="submit" id="submit" value="Send feedback" tabindex="6">
