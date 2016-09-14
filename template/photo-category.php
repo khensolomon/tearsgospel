@@ -20,9 +20,8 @@
 		);
 		if ($img_query->posts) :
 			$img_total = count($img_query->posts);
-			// $img_category_link = get_permalink().$cat_link_id.'/'.$category->category_nicename;
 			$img_category_link = add_query_arg( array(
-					$cat_link_id => $category->category_nicename
+					'gallery' => $category->category_nicename
 			), get_permalink() );
 			$image = array_shift($img_query->posts);
 		?>

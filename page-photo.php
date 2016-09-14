@@ -13,9 +13,11 @@
 					'parent'  => 0
 				)
 			);
-			$category_link_id = 'gallery'; //category
-			set_query_var('cat_link_id', $category_link_id);
-			$category_link_name = $_GET[$category_link_id];
+			// add_query_arg( 'key', 'value', 'http://example.com' );
+			// $category_link_id = 'gallery'; //category
+			$category_link_name = get_query_var('gallery');
+			// set_query_var('cat_link_id', $category_link_id);
+			// $category_link_name = get_query_var( 'gallery')
 			if ($category_link_name && $catId = array_search($category_link_name, array_column($categories, 'category_nicename'))) {
 				
 				// $catObject = array_filter( $categories, function ($e) use($category_link_name) { return $e->category_nicename == $category_link_name; });

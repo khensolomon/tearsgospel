@@ -19,9 +19,9 @@ $img_query = new WP_Query(
 );
 if ($img_query->posts) :
 	$img_total_page = count($img_query->posts);
-	$img_category_link = add_query_arg( array(
-			'category' => $catGallery->category_nicename
-	), get_permalink() );
+	// $img_category_link = add_query_arg( array(
+	// 		'category' => $catGallery->category_nicename
+	// ), get_permalink() );
 ?>
 <div class="row">
 	<div class="col-md-12 col-sm-centered" id="galleries">
