@@ -45,3 +45,29 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+#CUSTOM
+node_modules
+backup
+nbproject
+delete
+output
+test
+*tmp*/
+*delete.*
+*tmp.*
+*org.*
+*Copy.*
+*[0-9]+.*
+assets/*/*[0-9].*
+assets/*/*Delete*.*
+assets/*/*Working*.*
+assets/*/*Tmp*.*
+assets/*/job*
+#assets/*/*[job,Working,Tmp,Delete]*.*
+#development/*/*/[0-9]+.*
+assets/bootstrap/*
+!assets/bootstrap/config.json
+assets/img
+assets/psd/*
+!assets/psd/*.psd
