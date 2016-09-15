@@ -201,6 +201,9 @@ footer .container .row  {
 footer .container .row #social {
   /*text-align: center;*/
 }
+footer .container .row img.avatar {
+  border-radius: 50px;
+}
 footer .container .row #social ul{
 }
 footer .container .row #social ul li{

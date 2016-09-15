@@ -108,8 +108,8 @@ function lethil_widgets_init() {
 		'name'          => __( 'Footer', 'lethil' ),
 		'id'            => 'footer',
 		'description'   => __( 'Appears in every single pages of the footer. responsive require 3 columns (3 widgets)!', 'lethil' ),
-		'before_widget' => '<div id="%1$s" class="col-md-4 widget %2$s">',
-		'after_widget'  => '</div>',
+		'before_widget' => '<section id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</section>',
 		'before_title'  => '<h4 class="widget-title">',
 		'after_title'   => '</h4>',
 	) );

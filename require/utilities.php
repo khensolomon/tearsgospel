@@ -36,6 +36,22 @@ if ( ! function_exists( 'get_categories_select' ) ) :
 	}
 endif;
 /**
+ * get Total widget and add to class, responsive
+ * used footer
+ */
+if ( ! function_exists( 'custom_sidebar_widget_class_responsive' ) ) :
+	function custom_sidebar_widget_class_responsive($params) {
+    $sidebar_id = $params[0]['id'];
+    if ( $sidebar_id == 'footer' ) {
+      $total_widgets = wp_get_sidebars_widgets();
+      $sidebar_widgets = count($total_widgets[$sidebar_id]);
+      $params[0]['before_widget'] = str_replace('class="', 'class="col-md-' . floor(12 / $sidebar_widgets) . ' ', $params[0]['before_widget']);
+    }
+    return $params;
+	}
+	add_filter('dynamic_sidebar_params','custom_sidebar_widget_class_responsive');
+endif;
+/**
  * Prints HTML with meta information for the current post-date/time and author.
  */
 if ( ! function_exists( 'lethil_posted_on' ) ) :

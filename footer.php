@@ -1,4 +1,4 @@
-<footer>
+<footer class="container-fluid">
   <div class="container">
     <hr class="featurette-divider" />
     <?php if ( is_active_sidebar( 'footer' )  ) : ?>

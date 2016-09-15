@@ -1,14 +1,14 @@
 <?php 
-class custom_user_widget extends WP_Widget {
+class lethil_user_widget extends WP_Widget {
   function __construct() {
     parent::__construct(
       // ID
-      'custom_user_widget', 
+      'lethil_user_widget', 
       // Name
       'User',
       // Description
       array( 
-        'description' => 'User dashboard'
+        'description' => 'Login, Avatar & RSS!'
       ) 
     );
   }
@@ -22,12 +22,14 @@ class custom_user_widget extends WP_Widget {
     <ul>
     <?php if ( is_user_logged_in() ) : $user = wp_get_current_user(); ?>
       <li class="user">
-      <?php 
-        if (is_numeric($instance['avatar']) and $instance['avatar'] > 0) {
-          echo get_avatar($user->ID, $instance['avatar']); 
-        }
-        echo str_replace('Site Admin',$user->display_name,wp_register('','',0));
-      ?>
+        <div>
+          <?php 
+            if (is_numeric($instance['avatar']) and $instance['avatar'] > 0) {
+              echo get_avatar($user->ID, $instance['avatar']); 
+            }
+            echo str_replace('Site Admin',$user->display_name,wp_register('','',0));
+          ?>
+        </div>
       </li>
       <li class="logout"><?php wp_loginout(); ?></li> 
     <?php else: ?>
@@ -37,19 +39,19 @@ class custom_user_widget extends WP_Widget {
     <?php 
     switch ($instance['rss']) : 
       case 1 : ?>
-        <li>
-          <a href="<?php bloginfo('rss2_url'); ?>" title="<?php _e('Syndicate using RSS'); ?>" class="rss entries">Entries <abbr title="Really Simple Syndication">RSS</abbr></a>
+        <li class="rss entries">
+          <a href="<?php bloginfo('rss2_url'); ?>" title="<?php _e('Syndicate using RSS'); ?>">Entries <abbr title="Really Simple Syndication">RSS</abbr></a>
         </li>
-        <li>
-          <a href="<?php bloginfo('comments_rss2_url'); ?>" target="_blank" class="rss feed">Comments <abbr title="Really Simple Syndication">RSS</abbr></a> 
+        <li class="rss feed">
+          <a href="<?php bloginfo('comments_rss2_url'); ?>" target="_blank">Comments <abbr title="Really Simple Syndication">RSS</abbr></a> 
         </li>
       <?php break; case 2 : ?>
-        <li>
-          <a href="<?php bloginfo('rss2_url'); ?>" title="<?php _e('Syndicate using RSS'); ?>" class="rss entries">Entries <abbr title="Really Simple Syndication">RSS</abbr></a>
+        <li class="rss entries">
+          <a href="<?php bloginfo('rss2_url'); ?>" title="<?php _e('Syndicate using RSS'); ?>">Entries <abbr title="Really Simple Syndication">RSS</abbr></a>
         </li>
       <?php break; case 3 : ?>
-        <li>
-          <a href="<?php bloginfo('comments_rss2_url'); ?>" target="_blank" class="rss feed">Comments <abbr title="Really Simple Syndication">RSS</abbr></a> 
+        <li class="rss feed">
+          <a href="<?php bloginfo('comments_rss2_url'); ?>" target="_blank">Comments <abbr title="Really Simple Syndication">RSS</abbr></a> 
         </li>
       <?php break; 
     endswitch; ?>
@@ -96,8 +98,8 @@ class custom_user_widget extends WP_Widget {
 }
 
 // Register and load the widget
-function custom_user_widget_load() {
-	register_widget( 'custom_user_widget' );
+function lethil_user_widget_load() {
+	register_widget( 'lethil_user_widget' );
 }
-add_action( 'widgets_init', 'custom_user_widget_load' );
+add_action( 'widgets_init', 'lethil_user_widget_load' );
 ?>
