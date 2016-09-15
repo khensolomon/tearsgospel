@@ -32,7 +32,9 @@
 		</div>
 	</div>
 </div>
+<?php
+	// custom_post_query(get_post_meta(get_the_ID()),'template/page',7);
+?>
 <?php 
-	// custom_post_query(array( 'cat' => 13,'posts_per_page' => 5 ),'template/home');
 	get_footer();
 ?>

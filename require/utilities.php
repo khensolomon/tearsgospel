@@ -6,15 +6,21 @@
  * $slidecat = get_theme_mod( 'tearsgospel_featured_cat' );
  */
 if ( ! function_exists( 'custom_post_query' ) ) :
-	function custom_post_query($query=array(),$template)
+	function custom_post_query($cat,$template,$posts_per_page=7)
 	{
-		$content = new WP_Query($query);
-		if ($content->have_posts()) {
-			while ($content->have_posts()) {
-				$content->the_post(); 
-				get_template_part($template, get_post_format() );
+		if (is_array($cat['catid'])) {
+			$query = array(
+				'cat' => $cat['catid'][0],
+				'posts_per_page' => $posts_per_page
+			);
+			$content = new WP_Query($query);
+			if ($content->have_posts()) {
+				while ($content->have_posts()) {
+					$content->the_post(); 
+					get_template_part($template, get_post_format() );
+				}
+				wp_reset_query();
 			}
-			wp_reset_query();
 		}
 	}
 endif;
