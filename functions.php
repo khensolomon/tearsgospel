@@ -194,6 +194,7 @@ add_filter( 'query_vars', 'custom_add_query_vars_filter' );
  * Utilities
  */
 require get_template_directory() . '/require/utilities.php';
+require get_template_directory() . '/require/user.widget.php';
 /**
  * Options
  */
