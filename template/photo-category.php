@@ -40,7 +40,7 @@
 					if ($category->description == '') {
 						echo esc_html($category->name).' gallery contains ';
 					} else {
-						echo esc_html($category->description ); 
+						echo esc_html($category->description); 
 					}
 				?>
 				<strong>
@@ -55,7 +55,7 @@
 					?>
 				</strong>
 			</p>
-			<a class="hover" href="<?php echo $img_category_link; ?>"><?php echo esc_html($category->name ); ?></a>
+			<a href="<?php echo $img_category_link; ?>" class="hover"><?php echo esc_html($category->name ); ?></a>
 		</div>
 		<?php endif; ?>
 	<?php endforeach; ?>

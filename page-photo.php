@@ -13,6 +13,7 @@
 					'parent'  => 0
 				)
 			);
+			// set_query_var('catGallery', $catId);
 			// add_query_arg( 'key', 'value', 'http://example.com' );
 			// $category_link_id = 'gallery'; //category
 			$category_link_name = get_query_var('gallery');
