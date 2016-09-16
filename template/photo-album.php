@@ -1,14 +1,3 @@
-<div class="container-fluid page">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12 text-center">
-				<h1><?php echo esc_html($catGallery->name); ?></h1>
-				<p><?php echo esc_html($catGallery->description); ?></p>
-			</div>
-		</div>
-	</div>
-</div>
-
 <?php 
 $img_current_page = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 $img_query = new WP_Query(
@@ -17,48 +6,52 @@ $img_query = new WP_Query(
 		'post_type'  => 'attachment',
 		'post_mime_type' => 'image',
 		'post_status' => 'published',
-		'posts_per_page' => 30,
+		// 'showposts' => -1,
+		'posts_per_page' => 37,
 		'paged' => $img_current_page,
 		'pagination'=> true
 	)
 );
-if ($img_query->posts) :
-	$img_total_page = count($img_query->posts);
-	// $img_category_link = add_query_arg( array(
-	// 		'category' => $catGallery->category_nicename
-	// ), get_permalink() );
 ?>
-<div class="container-fluid">
+<div class="container-fluid page">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12 col-sm-centered" id="galleries">
-			<?php foreach ($img_query->posts as $image ) : ?>
-				<div class="category text-center">
-					<?php 
-					// $attachment = get_post( $image->ID);
-					// print_r($attachment);
-					// echo wp_get_attachment_image($image->ID, 'large',array('class'=>'img-responsive center-block'));
-					// return array(
-					// 	'alt' => get_post_meta( $attachment->ID, '_wp_attachment_image_alt', true ),
-					// 	'caption' => $attachment->post_excerpt,
-					// 	'description' => $attachment->post_content,
-					// 	'href' => get_permalink( $attachment->ID ),
-					// 	'src' => $attachment->guid,
-					// 	'title' => $attachment->post_title
-					// );
-					// $attachment =  wp_get_attachment($image->ID);
-					// print_r($attachment);
-					// print_r($image);
-					// echo wp_get_attachment_link($image->ID, false, true, false, 'My link text' ); 
-					// echo wp_get_attachment_link($image->ID, '' , false, false, 'My link text' ); 
-					// echo wp_get_attachment_image($image->ID, 'large',false,array('class'=>'img-responsive center-block'));
-					?>
-					<h3>
-						<?php echo wp_get_attachment_link($image->ID, false, true, false, $image->post_title); ?>
-					</h3>
-					<?php echo wp_get_attachment_link($image->ID,'large',false, false,false,array('class'=>'img-responsive center-block')); ?>
-				</div>
-			<?php endforeach; ?>
+			<div class="col-md-12 text-center">
+				<h1><?php echo esc_html($catGallery->name); ?> <span class="badge progress-bar-info"><?php echo $img_query->found_posts; ?></span></h1>
+				<p><?php echo esc_html($catGallery->description); ?></p>
+			</div>
+		</div>
+	</div>
+</div>
+<?php
+if ($img_query->posts) :
+	// $img_total_post = $img_query->found_posts;
+	// $img_total_page = count($img_query->posts);
+	// $img_total_page = $img_query->post_count;
+?>
+<div class="container-fluid">
+	<div class="containers">
+		<div class="row">
+			<div class="col-md-12 album" id="galleries">
+				<?php foreach ($img_query->posts as $image ) : ?>
+					<section>
+						<figure>
+							<a href="<?php echo wp_get_attachment_url($image->ID); ?>" title="<?php echo (!$image->post_content? $image->post_title : $image->post_content); ?>">
+								<?php 
+									// thumbnail, medium, large
+									// $id, $size, $permalink, $icon, $text, $attr
+									echo wp_get_attachment_image($image->ID, 'large',true, array('class'=>'img-responsive center-block'));
+									// echo wp_get_attachment_link($image->ID,'large',false, false,false,array('class'=>'img-responsive center-block'));
+									// echo wp_get_attachment_link($image->ID, false, false, false, 'image gose here',array('title'=>'oksikfe')); 
+									// echo $img_query->post_count;
+								?>
+							</a>
+						</figure>
+						<h3>
+							<?php echo wp_get_attachment_link($image->ID, false, true, false, $image->post_title); ?>
+						</h3>
+					</section>
+				<?php endforeach; ?>
 			</div>
 			<?php 
 			$args = array(
@@ -72,7 +65,7 @@ if ($img_query->posts) :
 				// 'current'            => 0,
 				// 'show_all'           => false,
 				// 'end_size'           => 1,
-				// 'mid_size'           => 6,
+				'mid_size'           => 1,
 				// 'prev_next'          => true,
 				// 'prev_text'          => __('« Previous'),
 				// 'next_text'          => __('Next »'),

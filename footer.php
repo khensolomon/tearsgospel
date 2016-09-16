@@ -7,8 +7,8 @@
       </div>
     <?php endif; ?>
     <div class="row">
-      <div class="col-md-12">
-        <a class="scroll-to-top" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <!-- <a class="scroll-to-top" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a> -->
         <!-- <div class="pull-right scroll-to-top"><i class="glyphicon glyphicon-chevron-up">Back to top</i></div> -->
         &copy; <?php echo date("Y"); ?> <a class="copyright" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>.
         <?php
@@ -28,7 +28,7 @@
           'menu'              => 'social',
           'theme_location'    => 'social',
           'container'         => 'div',
-          'container_class'   => 'col-md-12',
+          'container_class'   => 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
           'container_id'      => 'social',
           'menu_class'        => 'social',
           'link_before'       => '<i class="social_icon fa"><span>',
