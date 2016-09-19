@@ -43,7 +43,7 @@ For more information about Lethil please go to https://codex.wordpress.org/Lethi
 ### Changelog
 
 #### 1.0
-* Released: December 8, 2016
+* Released: September 18, 2016
 
 Initial release
 

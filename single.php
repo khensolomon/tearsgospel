@@ -1,47 +1,40 @@
 <?php
 	get_header();
 ?>
-<div class="container-fluid bg-white">
-	<div class="container lethil">
+<div id="l21" class="container-fluid">
+	<div class="container">
 		<div class="row">
-			<?php while ( have_posts() ) : the_post(); ?>
-					<div class="col-md-12 col-sm-centered">
-						<?php get_template_part('template/blog', get_post_format()); ?>
+			<div class="col-md-12 text-center">
+				<h1><?php the_title(); ?></h1>
+				<div><?php custom_meta_posted_on(); ?></div>
+			</div>
+		</div>
+	</div>
+</div>
+<?php while ( have_posts() ) : the_post(); ?>
+	<?php get_template_part( 'template/post', get_post_format() ); ?>
+<?php endwhile; ?>
+<?php
+	// custom_post_query(get_post_meta(get_the_ID()),'template/page',7);
+?>
+<div id="l24" class="container-fluid">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<nav class="navigation post-navigation" role="navigation">
+					<div class="nav-links">
 						<?php
-							// the_posts_pagination( array(
-							// 	'prev_text'          => __( 'Previous page', 'lethil' ),
-							// 	'next_text'          => __( 'Next page', 'lethil' )
-							// ) );
-						?>
-
-						<nav class="navigation post-navigation" role="navigation">
-							<h1 class="screen-reader-text"><?php _e( 'Post navigation', 'twentyfourteen' ); ?></h1>
-							<div class="nav-links">
-								<?php
-								if ( is_attachment() ) :
-									previous_post_link( '%link', __( '<span class="meta-nav">Published In</span>%title', 'twentyfourteen' ) );
-								else :
-									previous_post_link( '%link', __( '<span class="meta-nav">Previous Post</span>%title', 'twentyfourteen' ) );
-									next_post_link( '%link', __( '<span class="meta-nav">Next Post</span>%title', 'twentyfourteen' ) );
-								endif;
-								?>
-							</div><!-- .nav-links -->
-						</nav><!-- .navigation -->	
-					<?php 
-							// if ( comments_open() || get_comments_number() ): 
-							// 	comments_template();
-							// 	endif;
+							previous_post_link( '%link', '%title');
+							next_post_link( '%link', '%title' );
 						?>
 					</div>
-					<?php if ( comments_open() || get_comments_number() ): ?>
-						<div class="col-md-12">
-							<code>post single</code>
-							<?php 
-							// comments_template();
-							?>
-						</div>
-					<?php endif; ?>
-			<?php endwhile; ?>
+				</nav>
+			</div>
+			<?php if ( comments_open() || get_comments_number() ): ?>
+				<div class="col-md-12">
+					<?php comments_template(); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>

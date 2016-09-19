@@ -42,7 +42,7 @@
 <?php if ( comments_open() ) : ?>
 	<div id="respond">
 		<h3>
-			<?php comment_form_title( 'Leave a Reply', 'Leave a Reply to %s' ); ?>
+			<?php comment_form_title( 'Leave a Reply..', 'Leave a Reply to %s' ); ?>
 		</h3>
 		<div class="cancel-comment-reply">
 			<small><?php cancel_comment_reply_link(); ?></small>
@@ -73,7 +73,7 @@
 					  <textarea class="form-control" rows="5" name="comment" id="comment" tabindex="4"></textarea>
 					</div>
 					<div class="input-group">
-					  <input type="submit" class="btn btn-primary contact-submit" name="submit" id="submit" value="Send feedback" tabindex="6">
+					  <input type="submit" class="btn btn-primary contact-submit" name="submit" id="submit" value="Comment" tabindex="6">
 						<?php comment_id_fields(); ?>
 					</div>
 					<?php do_action('comment_form', $post->ID); ?>

@@ -36,6 +36,24 @@ if ( ! function_exists( 'get_categories_select' ) ) :
 	}
 endif;
 /**
+ * custom post navigation
+ * used blog
+ */
+if ( ! function_exists( 'custom_the_posts_pagination' ) ) :
+	/*
+	function custom_the_posts_pagination($content)
+	{
+	    // Remove role attribute
+	    $content = str_replace('role="navigation"', '', $content);
+	    // Remove h2 tag
+	    $content = preg_replace('#<h2.*?>(.*?)<\/h2>#si', '', $content);
+	
+	    return $content;
+	}
+	add_action('navigation_markup_template', 'custom_the_posts_pagination');
+	*/
+endif;
+/**
  * get Total widget and add to class, responsive
  * used footer
  */
@@ -54,22 +72,62 @@ endif;
 /**
  * Prints HTML with meta information for the current post-date/time and author.
  */
-if ( ! function_exists( 'lethil_posted_on' ) ) :
-	function lethil_posted_on()
+if ( ! function_exists( 'custom_meta_posted_on' ) ) :
+	function custom_meta_posted_on()
 	{
-		if ( is_sticky() && is_home() && ! is_paged() ) {
-			printf( '<span class="sticky-post">%s</span>', __( 'Featured', 'lethil' ) );
+		// if ( is_sticky() && is_home() && ! is_paged() ) {
+		// 	printf( '<span class="sticky-post">%s</span>', __( 'Featured', 'lethil' ) );
+		// }
+		if ($tags_list = get_the_tag_list('', ', ')) {
+			printf( '<div class="tags-links"><span class="screen-reader-text label label-primary">%1$s</span> %2$s</div>','Tag', $tags_list);
 		}
+		
+		if ( in_array( get_post_type(), array( 'post', 'attachment' ) ) ) {
+			$time_string = '<time class="entry-date published updated label label-default" datetime="%1$s">%2$s</time>';
+			if ( 'post' == get_post_type() ) {
+				if (!is_singular()) {
+					if (current_user_can('edit_posts')) {
+					$time_string .= ' <a href="%3$s" class="label label-danger">%4$s</a>';
+					}
+				}
+			}
+			if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+				$time_string .= ' <time class="updated label label-info" datetime="%5$s">%6$s</time> ';
+			}
 
-		$format = get_post_format();
-		if ( current_theme_supports( 'post-formats', $format ) ) {
-			printf( '<div class="entry-format">%1$s<a href="%2$s">%3$s</a></div>',
-				sprintf( '<span class="screen-reader-text">%s </span>'),
+			
+			
+			$time_strings = sprintf( $time_string,
+				esc_attr( get_the_date( 'c' ) ),
+				get_the_date('Y-m-d'),
+				get_edit_post_link(),
+				'Edit',
+				esc_attr( get_the_modified_date( 'c' ) ),
+				get_the_modified_date()
+			);
+
+			printf( '<div class="posted-on">%1$s</div>',
+				$time_strings
+			);
+		}
+		if ( $categories_list = get_the_category_list(', ')) {
+			printf( '<div class="cat-links"><span class="screen-reader-text label label-primary">%1$s</span> %2$s</div>', 'Category', $categories_list);
+		}
+		if ($format = get_post_format() and current_theme_supports( 'post-formats', $format ) ) {
+			printf( '<div class="entry-format">%1$s <a href="%2$s" class="label label-info">%3$s</a></div>',
+				sprintf( '<span class="screen-reader-text label label-primary">%s</span>', 'Format' ),
 				esc_url( get_post_format_link( $format ) ),
 				get_post_format_string( $format )
 			);
 		}
-
+		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+			echo '<div class="comments-link">';
+			/* translators: %s: post title */
+			// comments_popup_link( sprintf( __( 'Leave a comment<span class="screen-reader-text"> on %s</span>', 'lethil' ), get_the_title() ) );
+			comments_popup_link( '<span class="leave-reply label label-warning">Reply</span>', 'Comment <span class="badge">1</span>', 'Comments <span class="badge">%</span>');
+			echo '</div>';
+		}
+		
 		// if ( in_array( get_post_type(), array( 'post', 'attachment' ) ) ) {
 		// 	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
 		// 
@@ -91,21 +149,21 @@ if ( ! function_exists( 'lethil_posted_on' ) ) :
 		// 	);
 		// }
 
-		if ( 'post' == get_post_type() ) {
-			if ( is_singular() || is_multi_author() ) {
-				printf( '<span class="byline"><span class="author vcard"><span class="screen-reader-text">%1$s </span><a class="url fn n" href="%2$s">%3$s</a></span></span>',
-					_x( 'Author', 'Used before post author name.', 'lethil' ),
-					esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-					get_the_author()
-				);
-			}
-
-			$tags_list = get_the_tag_list( '', __( ', ', 'Used between list items, there is a space after the comma.', 'lethil' ) );
-			if ( $tags_list ) {
-				printf( '<div class="tags-links">%1$s</div>', $tags_list
-				);
-			}
-		}
+		// if ( 'post' == get_post_type() ) {
+		// 	if ( is_singular() || is_multi_author() ) {
+		// 		printf( '<span class="byline"><span class="author vcard"><span class="screen-reader-text">%1$s </span><a class="url fn n" href="%2$s">%3$s</a></span></span>',
+		// 			_x( 'Author', 'Used before post author name.', 'lethil' ),
+		// 			esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+		// 			get_the_author()
+		// 		);
+		// 	}
+		// 
+		// 	$tags_list = get_the_tag_list( '', __( ', ', 'Used between list items, there is a space after the comma.', 'lethil' ) );
+		// 	if ( $tags_list ) {
+		// 		printf( '<div class="tags-links">%1$s</div>', $tags_list
+		// 		);
+		// 	}
+		// }
 
 		// if ( is_attachment() && wp_attachment_is_image() ) {
 		// 	// Retrieve attachment metadata.
@@ -119,13 +177,13 @@ if ( ! function_exists( 'lethil_posted_on' ) ) :
 		// 	);
 		// }
 
-		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
-			echo '<div class="comments-link">';
-			/* translators: %s: post title */
-			// comments_popup_link( sprintf( __( 'Leave a comment<span class="screen-reader-text"> on %s</span>', 'lethil' ), get_the_title() ) );
-			comments_popup_link( '<span class="leave-reply">' . __( 'reply', 'lethil' ) . '</span>', __( '1 comment', 'comments number', 'lethil' ), __( '% comments', 'comments number', 'lethil' ) );
-			echo '</div>';
-		}
+		// if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+		// 	echo '<div class="comments-link">';
+		// 	/* translators: %s: post title */
+		// 	// comments_popup_link( sprintf( __( 'Leave a comment<span class="screen-reader-text"> on %s</span>', 'lethil' ), get_the_title() ) );
+		// 	comments_popup_link( '<span class="leave-reply">' . __( 'reply', 'lethil' ) . '</span>', __( '1 comment', 'comments number', 'lethil' ), __( '% comments', 'comments number', 'lethil' ) );
+		// 	echo '</div>';
+		// }
 	}
 endif;
 ?>

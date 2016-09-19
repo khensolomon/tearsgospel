@@ -1,35 +1,38 @@
 <?php
 	get_header();
 ?>
-<div class="container-fluid bg-white">
-	<div class="container lethil col-sm-centered">
+<style>
+</style>
+<div id="l11" class="container-fluid">
+	<div class="containers">
 		<div class="row">
-			<div class="col-md-8">
-				<div id="primary" class="content-area">
-					<main id="main" class="site-main" role="main">
-						<?php 
-						if ( have_posts() ) :
-							while ( have_posts() ) : the_post();
-								get_template_part( 'template/blog', get_post_format() );
-							endwhile;
-							the_posts_pagination( array(
-								'prev_text'          => __( 'Previous page', 'lethil' ),
-								'next_text'          => __( 'Next page', 'lethil' ),
-								// 'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'lethil' ) . ' </span>',
-							) );
-						else :
-							get_template_part( 'template/blog', 'none' );
-						endif;
-						?>
+			<div class="<?php echo is_active_sidebar( 'sidebar' )?'col-md-9':'col-md-12'; ?>">
+				<?php if ( have_posts() ) : ?>
+					<main id="blog" class="row">
+						<?php while ( have_posts() ) : the_post(); ?>
+							<?php get_template_part( 'template/blog', get_post_format() ); ?>
+						<?php endwhile; ?>
 					</main>
+				<?php else : ?>
+					<main id="blogNone" class="row">
+						<?php get_template_part( 'template/blog', 'none' ); ?>
+					</main>
+				<?php endif; ?>
+			</div>
+			<?php get_sidebar(); ?>
+		</div>
+		<?php if ( have_posts() ) :  ?>
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<?php 
+					the_posts_pagination( array(
+						'prev_text'          => 'Previous',
+						'next_text'          => 'Next'
+					) );
+					?>
 				</div>
 			</div>
-			<div class="col-md-4">
-				<?php 
-					get_sidebar();
-				?>
-			</div>
-		</div>
+		<?php endif;  ?>
 	</div>
 </div>
 <?php

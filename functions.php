@@ -105,6 +105,15 @@ function lethil_widgets_init() {
 	) );
 	
 	register_sidebar(array(
+		'name'          => __( 'Post', 'lethil' ),
+		'id'            => 'single',
+		'description'   => __( 'Appears in every single posts!', 'lethil' ),
+		'before_widget' => '<section id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</section>',
+		'before_title'  => '<h4 class="widget-title">',
+		'after_title'   => '</h4>',
+	) );
+	register_sidebar(array(
 		'name'          => __( 'Footer', 'lethil' ),
 		'id'            => 'footer',
 		'description'   => __( 'Appears in every single pages of the footer. responsive require 3 columns (3 widgets)!', 'lethil' ),

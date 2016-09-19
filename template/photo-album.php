@@ -70,18 +70,22 @@ if ($img_query->posts) :
 				// 'prev_text'          => __('« Previous'),
 				// 'next_text'          => __('Next »'),
 				// 'type'               => 'plain',
-				'type' => 'list'
+				// 'type' => 'list'
 				// 'add_args'           => false,
 				// 'add_fragment'       => '',
 				// 'before_page_number' => '',
 				// 'after_page_number'  => ''
 			);
-			if ($args['total'] > 1) {
-				printf( '<div class="col-md-12 text-center pagination">%1$s</div>',
-						paginate_links( $args )
-				);
-			}
 			?>
+			<?php if ($args['total'] > 1) : ?>
+				<div class="col-md-12 text-center">
+					<nav class="navigation pagination" role="navigation">
+						<div class="nav-links">
+							<?php echo paginate_links( $args ); ?>
+						</div>
+					</nav>
+				</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
