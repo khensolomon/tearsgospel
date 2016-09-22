@@ -54,6 +54,8 @@ Only the default and dark color schemes are accessibility ready.
 ## Todo
 
 * if not custom-logo is present, use `get_bloginfo('name')`
+* single attachment
+* single post attachment columns
 * page
   * Home
   * Contact
@@ -71,3 +73,5 @@ Only the default and dark color schemes are accessibility ready.
   * footer
   
 * example
+* class's structure
+

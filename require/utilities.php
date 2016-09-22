@@ -36,22 +36,32 @@ if ( ! function_exists( 'get_categories_select' ) ) :
 	}
 endif;
 /**
- * custom post navigation
- * used blog
+ * custom array search
+ * used photo
+ * PHP 7.0 = array_keys(array_column($categories, 'category_nicename'), $category_link_name);
+ * PHP 7.0 = array_search(array('category_nicename' => $category_link_name), $categories);
  */
-if ( ! function_exists( 'custom_the_posts_pagination' ) ) :
-	/*
-	function custom_the_posts_pagination($content)
+if ( ! function_exists( 'array_key_search_value' ) ) :
+	function array_key_search_value($sKey, $id, $sArray)
 	{
-	    // Remove role attribute
-	    $content = str_replace('role="navigation"', '', $content);
-	    // Remove h2 tag
-	    $content = preg_replace('#<h2.*?>(.*?)<\/h2>#si', '', $content);
-	
-	    return $content;
+	   foreach ($sArray as $key => $val) {
+	       if ($val->{$sKey} == $id) {
+	           return $val;
+	       }
+	   }
+	   return false;
 	}
-	add_action('navigation_markup_template', 'custom_the_posts_pagination');
-	*/
+endif;
+/** 
+* Add a custom query
+*/
+if ( ! function_exists( 'custom_add_query_vars_filter' ) ) :
+	function custom_add_query_vars_filter($vars)
+	{
+	  $vars[] = 'gallery';
+	  return $vars;
+	}
+	add_filter( 'query_vars', 'custom_add_query_vars_filter' );
 endif;
 /**
  * get Total widget and add to class, responsive

@@ -13,7 +13,7 @@
 			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 </head>
-<body>
+<body <?php body_class(); ?>>
 <nav id="navigator" class="navbar navbar-default navbar-static-top">
 	<div class="container">
 		<div class="navbar-header">
@@ -31,7 +31,7 @@
 				'theme_location'    => 'primary',
 				'depth'             => 2,
 				'container'         => 'div',
-				'container_class'   => 'collapse navbar-collapse col-sm-centered navbar-ex1-collapse',
+				'container_class'   => 'collapse navbar-collapse text-sm-center navbar-ex1-collapse',
 				'container_id'   		=> 'navbar',
 				'menu_class'        => 'nav navbar-nav navbar-right',
 				'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',

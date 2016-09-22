@@ -7,18 +7,26 @@ $img_query = new WP_Query(
 		'post_mime_type' => 'image',
 		'post_status' => 'published',
 		// 'showposts' => -1,
-		'posts_per_page' => 37,
+		'posts_per_page' => 36,
 		'paged' => $img_current_page,
 		'pagination'=> true
 	)
 );
 ?>
-<div class="container-fluid page">
+<div <?php post_class('container-fluid'); ?>>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12 text-center">
+			<div class="col-md-8 col-md-offset-2 text-center">
 				<h1><?php echo esc_html($catGallery->name); ?> <span class="badge progress-bar-info"><?php echo $img_query->found_posts; ?></span></h1>
-				<p><?php echo esc_html($catGallery->description); ?></p>
+				<p>
+					<?php 
+						if ($catGallery->description == '') {
+							echo esc_html($catGallery->name).' gallery contains '.$img_query->found_posts.'!';
+						} else {
+							echo esc_html($catGallery->description); 
+						}
+					?>
+				</p>
 			</div>
 		</div>
 	</div>
@@ -29,29 +37,28 @@ if ($img_query->posts) :
 	// $img_total_page = count($img_query->posts);
 	// $img_total_page = $img_query->post_count;
 ?>
-<div class="container-fluid">
+<div class="albums container-fluid">
 	<div class="containers">
 		<div class="row">
-			<div class="col-md-12 album" id="galleries">
-				<?php foreach ($img_query->posts as $image ) : ?>
-					<section>
-						<figure>
-							<a href="<?php echo wp_get_attachment_url($image->ID); ?>" title="<?php echo (!$image->post_content? $image->post_title : $image->post_content); ?>">
-								<?php 
-									// thumbnail, medium, large
-									// $id, $size, $permalink, $icon, $text, $attr
-									echo wp_get_attachment_image($image->ID, 'large',true, array('class'=>'img-responsive center-block'));
-									// echo wp_get_attachment_link($image->ID,'large',false, false,false,array('class'=>'img-responsive center-block'));
-									// echo wp_get_attachment_link($image->ID, false, false, false, 'image gose here',array('title'=>'oksikfe')); 
-									// echo $img_query->post_count;
-								?>
-							</a>
-						</figure>
-						<h3>
-							<?php echo wp_get_attachment_link($image->ID, false, true, false, $image->post_title); ?>
-						</h3>
-					</section>
-				<?php endforeach; ?>
+			<div class="col-md-12">
+				<div class="row display-all-flex text-center" id="arts">
+					<?php foreach ($img_query->posts as $image ) : ?>
+						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+							<section>
+								<h3>
+									<?php echo wp_get_attachment_link($image->ID, false, true, false, $image->post_title); ?>
+								</h3>
+								<figure>
+									<a href="<?php echo wp_get_attachment_url($image->ID); ?>" title="<?php echo (!$image->post_content? $image->post_title : $image->post_content); ?>">
+										<?php 
+											echo wp_get_attachment_image($image->ID, 'large',true, array('class'=>'img-responsive center-block'));
+										?>
+									</a>
+								</figure>
+							</section>
+						</div>
+					<?php endforeach; ?>
+				</div>
 			</div>
 			<?php 
 			$args = array(

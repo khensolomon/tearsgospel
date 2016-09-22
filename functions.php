@@ -199,14 +199,6 @@ function custom_add_image_category_filter() {
 	 }
 }
 add_action( 'restrict_manage_posts', 'custom_add_image_category_filter' );
-/** 
-* Add a custom query
-*/
-function custom_add_query_vars_filter( $vars ){
-  $vars[] = 'gallery';
-  return $vars;
-}
-add_filter( 'query_vars', 'custom_add_query_vars_filter' );
 /**
  * Utilities
  */

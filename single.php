@@ -1,7 +1,7 @@
 <?php
 	get_header();
 ?>
-<div id="l21" class="container-fluid">
+<div class="page container-fluid">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 text-center">
@@ -12,22 +12,19 @@
 	</div>
 </div>
 <?php while ( have_posts() ) : the_post(); ?>
-	<?php get_template_part( 'template/post', get_post_format() ); ?>
+	<?php get_template_part( 'template/single', get_post_format() ); ?>
 <?php endwhile; ?>
-<?php
-	// custom_post_query(get_post_meta(get_the_ID()),'template/page',7);
-?>
-<div id="l24" class="container-fluid">
+<div class="container-fluid">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 text-center">
 				<nav class="navigation post-navigation" role="navigation">
-					<div class="nav-links">
+					<ul class="nav-links pager">
 						<?php
-							previous_post_link( '%link', '%title');
-							next_post_link( '%link', '%title' );
+							next_post_link( '<li aria-hidden="true" class="badge">&laquo;%link</li> ', '%title' );
+							previous_post_link( '<li aria-hidden="true" class="badge">%link&raquo;</li>', '%title');
 						?>
-					</div>
+					</ul>
 				</nav>
 			</div>
 			<?php if ( comments_open() || get_comments_number() ): ?>
