@@ -37,7 +37,13 @@ $col_md = ceil(12/$imagesTotal);
 		<div class="row display-all-flex">
 			<?php foreach ($images as $image): ?>
 				<div class="col-md-3">
+					<h3>
+						<?php echo wp_get_attachment_link($image->ID, false, true, false, $image->post_title); ?>
+					</h3>
 					<?php echo wp_get_attachment_image( $image->ID, 'large',false,array('class' =>'img-responsive center-block')); ?>
+					<p>
+						<?php echo $image->post_content; ?>
+					</p>
 				</div>
 			<?php endforeach; ?>
 		</div>
