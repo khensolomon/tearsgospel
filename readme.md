@@ -1,7 +1,7 @@
 # Lethil
 
-* Theme Name: Lethil
-* Theme URI: https://lethil.me/themes/lethil/
+* Theme Name: tearsgospel
+* Theme URI: https://lethil.me/themes/tearsgospel/
 * Author: Khen Solomon Lethil
 * Author URI: https://lethil.me/
 * Description: Lethil is a modernized take on an ever-popular WordPress layout — the horizontal masthead with an optional right sidebar that works perfectly for blogs and websites. It has custom color options with beautiful default color schemes, a harmonious fluid grid using a mobile-first approach, and impeccable polish in every detail. Lethil will make your WordPress look beautiful everywhere.
