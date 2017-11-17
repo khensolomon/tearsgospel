@@ -93,7 +93,7 @@ add_action('after_setup_theme', 'lethil_setup' );
  * @link https://developer.wordpress.org/reference/functions/register_sidebar/
  * @since Lethil 1.0
  */
-function lethil_widgets_init() {
+function custom_widgets() {
 	register_sidebar(array(
 		'name'          => __( 'Blog', 'lethil' ),
 		'id'            => 'sidebar',
@@ -103,7 +103,7 @@ function lethil_widgets_init() {
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
 	) );
-	
+
 	register_sidebar(array(
 		'name'          => __( 'Post', 'lethil' ),
 		'id'            => 'single',
@@ -131,7 +131,7 @@ function lethil_widgets_init() {
 	// 	'before_title'  => '<h2 class="widget-title">',
 	// 	'after_title'   => '</h2>',
 	// ) );
-	// 
+	//
 	// register_sidebar(array(
 	// 	'name'          => __( 'Content Bottom 2', 'lethil' ),
 	// 	'id'            => 'sidebar-3',
@@ -142,53 +142,52 @@ function lethil_widgets_init() {
 	// 	'after_title'   => '</h2>',
 	// ) );
 }
-add_action('widgets_init', 'lethil_widgets_init' );
+add_action('widgets_init', 'custom_widgets' );
 
-function lethil_styles() {
+function custom_enqueue() {
 	// jQuery
 	wp_enqueue_script('jquery');
-	// Bootstrap
-	wp_enqueue_style('bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '3.3.7' );
-	// wp_enqueue_style('bootstrap_theme', get_template_directory_uri() . '/css/bootstrap-theme.min.css', array(), '3.3.7' );
-	wp_enqueue_style('font_awesome', get_template_directory_uri() . '/css/font-awesome.min.css', array(), '4.6.3' );
-	wp_enqueue_style('bootstrap_custom', get_template_directory_uri() . '/css/bootstrap.custom.css');
-	wp_enqueue_script('bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '3.3.7',true);
-	wp_enqueue_script('bootstrap-custom', get_template_directory_uri() . '/js/bootstrap.custom.js', array(), '3.3.7',true);
 
 	// Colorbox
 	wp_enqueue_script('colorbox-min', get_template_directory_uri() . '/js/colorbox/jquery.colorbox-min.js',array(),'1.6.4');
 	wp_enqueue_style('colorbox-css', get_template_directory_uri() . '/js/colorbox/colorbox.css',array(),'1.6.4');
-	
+
+	// Bootstrap
+	wp_enqueue_style('bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '3.3.7' );
+	// wp_enqueue_style('bootstrap_theme', get_template_directory_uri() . '/css/bootstrap-theme.min.css', array(), '3.3.7' );
+	wp_enqueue_script('bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '3.3.7',true);
+
+	// Font Awesome
+	wp_enqueue_style('font_awesome', get_template_directory_uri() . '/css/font-awesome.min.css', array(), '4.6.3' );
+
 	// Custom
-	wp_enqueue_script('lethil', get_template_directory_uri() . '/js/lethil.js');
+	wp_enqueue_style('lethilCSS', get_template_directory_uri() . '/css/lethil.css');
+	wp_enqueue_script('lethilJS', get_template_directory_uri() . '/js/lethil.js');
 
 	// Default style
-	wp_enqueue_style( 'lethil', get_stylesheet_uri() );
-	
+	// wp_enqueue_style( 'lethil', get_stylesheet_uri() );
+
 	// Google fonts
-	$google_forts = array(
-		'family' => urlencode('Droid+Serif|Fira+Mono|Raleway')
-	);
-	wp_enqueue_style( 'google-fonts', add_query_arg( $google_forts,'https://fonts.googleapis.com/css'), array(), null );
-	
+	wp_enqueue_style( 'google-fonts', add_query_arg( array('family' => urlencode('Droid+Serif|Fira+Mono|Raleway')),'https://fonts.googleapis.com/css'), array(), null );
+
 	// HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
 	// wp_enqueue_script( 'lethil-ie9', array('https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js','https://oss.maxcdn.com/respond/1.4.2/respond.min.js'), array( 'lethil-style' ), '20160816' );
 	// wp_style_add_data( 'lethil-ie9', 'conditional', 'lt IE 9' );
 }
-add_action('wp_enqueue_scripts', 'lethil_styles' );
+add_action('wp_enqueue_scripts', 'custom_enqueue' );
 function wpdocs_excerpt_more( $more ) {
     return '<a href="'.get_the_permalink().'" class="read-more" rel="nofollow">...more!</a>';
 }
 add_filter( 'excerpt_more', 'wpdocs_excerpt_more' );
-/** 
+/**
 * Register taxonomy for images
 */
 function custom_register_taxonomy_for_images() {
     register_taxonomy_for_object_type( 'category', 'attachment' );
 }
 add_action( 'init', 'custom_register_taxonomy_for_images' );
-/** 
-* Add a category filter to images 
+/**
+* Add a category filter to images
 */
 function custom_add_image_category_filter() {
 	 $screen = get_current_screen();

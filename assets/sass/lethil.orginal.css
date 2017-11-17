@@ -17,7 +17,7 @@ h1, h2, h3, h4,p {overflow: hidden;text-overflow: ellipsis;}
     display: flex;
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     -webkit-justify-content: space-around;
     justify-content: space-around;
@@ -60,7 +60,7 @@ col-lg- col-md-
       display: flex;
     	-webkit-flex-wrap: wrap;
     	flex-wrap: wrap;
-      justify-content: center; 
+      justify-content: center;
       align-items: center;
     	-webkit-justify-content: space-around;
     	justify-content: space-around;
@@ -94,7 +94,7 @@ nav.navigation.pagination {}
 nav.navigation.pagination div {}
 nav.navigation.pagination h2 {display: none;}
 nav.navigation.pagination div *{display: inline-block;background-color: #5e98d9;padding: 7px 15px;color: #FFFFFF;}
-nav.navigation.pagination div *:hover, 
+nav.navigation.pagination div *:hover,
 nav.navigation.pagination div *:focus {background-color: #0180ff;}
 nav.navigation.pagination div span{}
 nav.navigation.pagination div a{text-decoration: none;}
@@ -201,11 +201,11 @@ footer.container-fluid ul.reference li a:hover{text-shadow: 1px 1px 1px rgba(255
       0 20px 1px -9px rgba(0,0,0,0.15); /* The third layer shadow */
 }
 .blog.container-fluid main div article header{
-	padding: 2px 3%; 
+	padding: 2px 3%;
   box-shadow: 0px -2px 1px 0px rgba(0,0,0,0.10);
 }
 .blog.container-fluid main div article header h2{
-	margin: 0; 
+	margin: 0;
 }
 .blog.container-fluid main div article header h2 a{
 	color: #1f7ec0; font-size:60%; line-height: normal; text-shadow: 0px 1px 1px rgba(0,0,0,0.3);
@@ -288,7 +288,7 @@ footer.container-fluid ul.reference li a:hover{text-shadow: 1px 1px 1px rgba(255
     -moz-transition: all 1s ease;
          -o-transition: all 1s ease;
       -ms-transition: all 1s ease;
-             transition: all 1s ease; 
+             transition: all 1s ease;
 }
 .verso.container-fluid.post h2{
   color: #0e4e84;
@@ -391,14 +391,14 @@ footer.container-fluid ul.reference li a:hover{text-shadow: 1px 1px 1px rgba(255
   box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.4);
 }
 .galleries.container-fluid hr.featurette-divider {
-  border-style: solid; 
-  border-color: #cfd5da; 
-  border-width: 0 0 1px 0; 
-  border-radius: 5px; 
-  
-} 
-.galleries.container-fluid hr.featurette-divider:before { 
-  content: attr(title); 
+  border-style: solid;
+  border-color: #cfd5da;
+  border-width: 0 0 1px 0;
+  border-radius: 5px;
+
+}
+.galleries.container-fluid hr.featurette-divider:before {
+  content: attr(title);
   background-color: #fff;
   border-radius: 100%;
   padding: 5px 20px;
@@ -460,5 +460,3 @@ footer.container-fluid ul.reference li a:hover{text-shadow: 1px 1px 1px rgba(255
     box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.3);
   }
 }
-
-

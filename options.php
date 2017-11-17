@@ -22,10 +22,10 @@ function theme_options_init(){
 	global $setting_Id, $setting_Default;
 	register_setting($setting_Id, 'ThemeSettingDefault');
 }
-function zotheme_option_page_capability( $capability ) {
+function theme_option_page_capability( $capability ) {
 	return 'edit_theme_options';
 }
-add_filter( 'option_page_capability_zotheme_options', 'zotheme_option_page_capability' );
+add_filter( 'option_page_capability_zotheme_options', 'theme_option_page_capability' );
 function theme_options_add_page() {
 	//register_nav_menu( 'primary', __( 'Primary Menu', 'zotune' ) );
 	//add_submenu_page('themes.php', __('ZO Theme Setup', 'lethil'), __('ZO Theme Setup', 'lethil'), 8, 'zo_theme_edit', 'lethil_theme_options');
@@ -38,13 +38,13 @@ function theme_options_add_page() {
 	);
 
 	if ( ! $theme_page )
-		return;	
-	$help = '<h4>' . __( 'ZOTUNE DEVELOPER provide theme options for individual products.', 'twentyeleven' ) . '</h4>' .
-			'<p>' . __( 'Remember to click "Save Changes" to save any changes you have made to the theme options.', 'zotune' ) . '</p>' .
-			'<p><strong>' . __( 'For more information:', 'zotune' ) . '</strong></p>' .
-			'<p class="zotune">' . __( '<a href="http://zotune.com/" target="_blank"><span>For more info.</span></a>', 'zotune' ) . '</p>';
+		return;
+	$help = '<h4>' . __( 'lethil.developer provide theme options for individual products.', 'twentyeleven' ) . '</h4>' .
+			'<p>' . __( 'Remember to click "Save Changes" to save any changes you have made to the theme options.', 'lethil' ) . '</p>' .
+			'<p><strong>' . __( 'For more information:', 'lethil' ) . '</strong></p>' .
+			'<p class="lethil">' . __( '<a href="http://lethil.me/" target="_blank"><span>For more info.</span></a>', 'lethil' ) . '</p>';
 
-	add_contextual_help( $theme_page, $help );	
+	add_contextual_help( $theme_page, $help );
 }
 
 function lethil_theme_options_style() {
@@ -61,18 +61,18 @@ function lethil_theme_options_style() {
  */
 function lethil_theme_options() {
 	global $setting_Id, $setting_Default,$ThemeSettingShow;
-	// if ( ! isset( $_REQUEST['settings-updated'] ) ) $_REQUEST['settings-updated'] = false;		
+	// if ( ! isset( $_REQUEST['settings-updated'] ) ) $_REQUEST['settings-updated'] = false;
 ?>
-<div class="wrap"> 	
+<div class="wrap">
     <div class="updated fade manage-menus">
 			<p>
 				<?php _e('Options saved', 'lethil' ); ?>
 			</p>
 		</div>
 		<form method="post" action="options.php">
-			<?php 
+			<?php
 				settings_fields($setting_Id);
-				$ThemeSettingShow = get_option('ThemeSettingDefault'); 
+				$ThemeSettingShow = get_option('ThemeSettingDefault');
 			?>
 			<div class="postbox analyticsstat manage-menus">
 				<h3><?php _e("Analytics/Stat Tracker Code", 'lethil'); ?></h3>
@@ -80,9 +80,9 @@ function lethil_theme_options() {
 					<p>
 						<label><?php _e("Google Analytics?", 'lethil'); ?></label>
 						<select name="ThemeSettingDefault[analytics]">
-							<option value="Yes" 
+							<option value="Yes"
 								<?php selected('Yes', $ThemeSettingShow['analytics']); ?>>Yes</option>
-							<option value="No" 
+							<option value="No"
 								<?php selected('No', $ThemeSettingShow['analytics']); ?>>No</option>
 						</select>
 					</p>
